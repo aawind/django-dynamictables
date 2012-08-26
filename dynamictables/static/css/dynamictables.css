@@ -1,0 +1,14 @@
+html, body {
+  padding: 0; margin: 0;
+}
+
+a {
+  padding: 10px;
+}
+.panel {
+  float: left;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #000;
+}
+#datepicker_holder{ bottom:100%; position: absolute;}
