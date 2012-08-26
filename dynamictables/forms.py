@@ -1,7 +1,8 @@
 from django import forms
+import widget
 
 class CharForm(forms.Form):
-    field = forms.CharField()
+    field = widget.TextField()
 
 class IntForm(forms.Form):
     field = forms.IntegerField()

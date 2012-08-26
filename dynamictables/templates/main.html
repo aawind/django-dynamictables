@@ -21,23 +21,21 @@
         //var $dp = $('#datepicker_holder>input');
         //var $dph = $('#datepicker_holder');
         //var $dph_current = $dph;
+        var last_editor = new Object;
         
         function callback(data) {
-          
-            //if ($dph_current != dph) {
-            //  $dph_current.get("input").detach().prependTo($dph);
-            //}
+            editor_go_home();
           
             //alert("result: "+data);
             var head = "";
             var cols = new Array();
             columns_types.length = 0;
             for (var i=0; i < data.columns.length; ++i) {
-              head += "<a id='"+data.columns[i][1]+"'>" + data.columns[i][0] + "</a>";
+              head += "<td id='"+data.columns[i][1]+"'>" + data.columns[i][0] + "</td>";
               cols.push([data.columns[i][1], false]);
               columns_types.push([data.columns[i][1], data.columns[i][2]]);
             }
-            head = "<p>"+head+"</p>";
+            head = "<tr>"+head+"</tr>";
             
             var rows = "";
             
@@ -55,17 +53,17 @@
                   }
                 }
               }
-              var row = "<p id='"+data.rows[i][0]+"'>";
+              var row = "<tr id='"+data.rows[i][0]+"'>";
               
               for (var j=0; j < cols.length; ++j) {
-                row += "<a id='"+cols[j][0]+"' "+value_onclick+">" + cols[j][1] + "</a>";
+                row += "<td id='"+cols[j][0]+"' "+value_onclick+">" + cols[j][1] + "</td>";
               }
 
-              row += "</p>";
+              row += "</tr>";
               rows += row;
             }
             
-            right_panel.innerHTML = head + rows;
+            right_panel.innerHTML = "<table>" + head + rows + "</table>";
             
             //alert( "columns: "+ data.columns + " rows: "+ data.rows);
         }
@@ -78,14 +76,27 @@
           }
           return false;
         }
+        function editor_go_home() {
+          switch (last_editor.type) {
+            case 'C':
+              last_editor.$cell.text(last_editor.$instance.val());
+              break;
+            case 'I': break;
+            case 'D': 
+              var $dph = $('#datepicker_holder');
+              last_editor.$instance.detach().prependTo($dph);
+              break;
+          }
+          last_editor.type = false;
+          last_editor.$cell = false;
+          last_editor.$instance = false;
+        }
         function enable_edit($cell) {
           var row = $cell.parent().attr('id');
           var col = $cell.attr('id');
           var col_type = get_column_type(col);
           
-          //try {
-          //alert($cell.children()[0]);
-          //} catch(e) {}
+          editor_go_home();
           
           var tg = false;
           try {
@@ -98,23 +109,37 @@
           
           //alert( row + "," + col + " = " +  col_type);
           
+          last_editor.$type = col_type;
+          
           switch (col_type) {
-            case 'C': $cell.html("<input type='text' value='"+$cell.text()+"' />"); break;
+            case 'C':
+              $cell.html("<input type='text' value='"+$cell.text()+"' />");
+              last_editor.$cell = $cell;
+              last_editor.$instance = cell.children()[0];
+              last_editor.$instance.focus();
+			  break;
             case 'I': break;
-            case 'D': //$cell.html("<input id='datepicker' type='text' value='"+$cell.text()+"' />"); 
+            case 'D':
+              //$cell.html("<input id='datepicker' type='text' value='"+$cell.text()+"' />"); 
               //$('#datepicker').append( $cell );
               //$cell.append( $('#datepicker') );
               $cell.text("");
               var $dp = $('#datepicker_holder>input');
               $dp.val(current_edit.innerHTML);
               $dp.detach().prependTo($cell);
-            break;
+              $dp.focus();
+              last_editor.$instance = $dp;
+              break;
           }
           
         }
-        function activate_table($table) {
-          Dajaxice.dynamictables.get_table(callback, {'table':$table.attr('id')});
+		function activate_table_by_id(id) {
+          Dajaxice.dynamictables.get_table(callback, {'table':id});
         }
+        function activate_table($table) {
+		  activate_table_by_id($table.attr('id'));
+        }
+		
     </script>
     <script type="text/javascript">
     $(function(){
@@ -130,18 +155,13 @@
     {% dajaxice_js_import %}
 </head>
 <body>
-<!--svcript src="http://code.jquery.com/jquery-latest.min.js"></svcript-->
     <div id="current_edit" hidden="true"></div>
     <div id="datepicker_holder"><input id='datepicker' type='text' /></div>
     <div id="main">{% block main %}
       {% for table in tables %}
       <div class="panel" id="left_panel">
-          <h1><a id="{{ table.id }}" onclick="activate_table( $(this) );" >{{ table }}</a></h1>
-          {% for column in table.column_set.all %}
-          <!--a>{{ column.name }}</a-->
-          {% empty %}
-          <!--p>There are currently no columns! Add one below.</p-->
-          {% endfor %}
+          <h1><a id="{{ table.id }}" onclick="activate_table( $(this) );">{{ table }}</a></h1>
+		  {% if forloop.first %}<script>activate_table_by_id({{ table.id }});</script>{% endif %}
       </div>
       <div class="panel" id="right_panel">
       </div>
