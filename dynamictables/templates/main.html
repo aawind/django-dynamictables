@@ -8,19 +8,17 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/dynamictables.css">
     {% block extra_css %}{% endblock %}
     
-    
     <link type="text/css" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js" ></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js" ></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/i18n/jquery-ui-i18n.js" ></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script>
+    <!--script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script-->
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" ></script>
+	<script src="cdn.jquerytools.org/1.2.5/form/jquery.tools.min.js"></script>
     
     <script>
         var value_onclick = "onclick='enable_edit($(this));'";
         var columns_types = [];
-        //var $dp = $('#datepicker_holder>input');
-        //var $dph = $('#datepicker_holder');
-        //var $dph_current = $dph;
         var last_editor = new Object;
         
         function callback(data) {
@@ -144,7 +142,7 @@
     <script type="text/javascript">
     $(function(){
       $.datepicker.setDefaults(
-            $.extend($.datepicker.regional["ru"])
+        $.extend($.datepicker.regional["ru"])
       );
       $("#datepicker").datepicker();
     });
