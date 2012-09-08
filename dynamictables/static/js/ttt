@@ -1,62 +1,41 @@
-{% load dajaxice_templatetags %}
-<!doctype html>
-<html lang="en">
-<head>
+//{% load dajaxice_templatetags %}
 
-    <meta charset="utf-8">
-    <title>{% block title %}DinamicTables{% endblock %}</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/dynamictables.css">
-    {% block extra_css %}{% endblock %}
-    
-    <link type="text/css" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js" ></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js" ></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/i18n/jquery-ui-i18n.js" ></script>
-    <!--script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script-->
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" ></script>
-    <script src="http://cdn.jquerytools.org/1.2.5/form/jquery.tools.min.js"></script>
-    
-    <script>
-        var value_onclick = "onclick='enable_edit($(this));'";
-        var columns_types = [];
-        var last_editor = new Object;
-        //last_editor.valid = true;
-        var valer = new Object;
-        valer.queue = {};
-        valer.id = 0;
-        
-        function callback(data) {
-            //editor_go_home();
-            //if (!last_editor.valid) return;
-          
-            //alert("result: "+data);
-            var head = "";
-            var cols = new Array();
-            columns_types.length = 0;
-            for (var i=0; i < data.columns.length; ++i) {
-              head += "<td id='"+data.columns[i][1]+"'>" + data.columns[i][0] + "</td>";
-              cols.push([data.columns[i][1], false]);
-              columns_types.push([data.columns[i][1], data.columns[i][2]]);
-            }
-            head = "<tr>"+head+"</tr>";
-            
-            var rows = "";
-            
-            for (var i=0; i < data.rows.length; ++i) {
-              //alert(data.rows[i][0]);
-              for (var j=0; j < cols.length; ++j) {
-                cols[j][1] = false;
-              }
-              for (var j=0; j < data.rows[i][1].length; ++j) {
-                id = data.rows[i][1][j][0];
-                for (var k=0; k < cols.length; ++k) {
-                  if (cols[k][0]==id) {
-                    cols[k][1] = data.rows[i][1][j][1];
-                    break;
-                  }
-                }
-              }
-              var row = "<tr id='"+data.rows[i][0]+"'>";
+var value_onclick = "onclick='enable_edit($(this));'";
+var columns_types = [];
+var last_editor = new Object;
+var valer = new Object;
+valer.queue = {};
+valer.id = 0;
+
+function fillTable(data) {
+    var head = "";
+    var cols = new Array();
+    columns_types.length = 0;
+
+    for (var i=0; i < data.columns.length; ++i) {
+      head += "<td id='"+data.columns[i][1]+"'>" + data.columns[i][0] + "</td>";
+      cols.push([data.columns[i][1], false]);
+      columns_types.push([data.columns[i][1], data.columns[i][2]]);
+    }
+    head = "<tr>"+head+"</tr>";
+
+    var rows = "";
+
+    for (var i=0; i < data.rows.length; ++i) {
+      //alert(data.rows[i][0]);
+      for (var j=0; j < cols.length; ++j) {
+        cols[j][1] = false;
+      }
+    for (var j=0; j < data.rows[i][1].length; ++j) {
+      id = data.rows[i][1][j][0];
+      for (var k=0; k < cols.length; ++k) {
+        if (cols[k][0]==id) {
+            cols[k][1] = data.rows[i][1][j][1];
+            break;
+         }
+      }
+    }
+    var row = "<tr id='"+data.rows[i][0]+"'>";
               
               for (var j=0; j < cols.length; ++j) {
                 row += "<td id='"+cols[j][0]+"' "+value_onclick+">" + cols[j][1] + "</td>";
@@ -177,10 +156,6 @@
           activate_table_by_id($table.attr('id'));
         }
         
-        //function validate_editor() {
-        //  alert("editor!");
-        //}
-
         function validate(val, f_type, $cell) {
           valer.queue[valer.id]=$cell;
           var f = {'field':val+''};
@@ -196,37 +171,13 @@
           if (data.errors.length) color = "#ff0000";
           $cell.css("border", "1px solid "+color);
         }
-		
-    </script>
-    <script type="text/javascript">
-    $(function(){
-      $.datepicker.setDefaults(
-        $.extend($.datepicker.regional["ru"])
-      );
-      $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-      $('#datepicker').blur(function (e) {validate_editor();});
-    });
-    </script>
 
-    {% block extra_js %}{% endblock %}
-    
-    {% dajaxice_js_import %}
-</head>
-<body>
-    <div id="current_edit" hidden="true"></div>
-    <div id="datepicker_holder"><input id='datepicker' type='text' /></div>
-    <div id="main">{% block main %}
-      {% for table in tables %}
-      <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="left_panel">
-          <h1><a id="{{ table.id }}" onclick="activate_table( $(this) );">{{ table }}</a></h1>
-		  {% if forloop.first %}<script>activate_table_by_id({{ table.id }});</script>{% endif %}
-      </div>
-      <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="right_panel">
-      </div>
-      {% empty %}
-      <p>There are currently no tables! Add one below.</p>
-      {% endfor %}
-      <br clear="all">
-    {% endblock %}</div>
-    {% block form %}<div style="width:100px;height:30px"><iframe frameborder="0" src="/form/?type=I"/>{% endblock %}
-</body>
+$(function(){
+  $.datepicker.setDefaults(
+    $.extend($.datepicker.regional["ru"])
+  );
+  $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+  $('#datepicker').blur(function (e) {validate_editor();});
+});
+
+//{% dajaxice_js_import %}

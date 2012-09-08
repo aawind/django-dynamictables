@@ -66,4 +66,5 @@ INSTALLED_APPS = (
     'django_socketio',
     'dajaxice',
     'dynamictables',
+    'south',
 )

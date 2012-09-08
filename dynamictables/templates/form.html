@@ -5,7 +5,10 @@
     <meta charset="utf-8">
     <title>{% block title %}DinamicTables Form{% endblock %}</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/dynamictables.css">
-
+    
+    <style>
+    label { display: none; }
+    </style>
 </head>
 <body>
     {% if errors %}
@@ -18,8 +21,8 @@
     <form action="/form/{% if form_type %}?type={{ form_type }}{% endif %}" method="post">
       {% csrf_token %}
       <table>
-        {{ form.as_table }}
-      <input type="submit" value="Send">
+        {{ form.as_p }}
+      <input type="submit" value="Send" style="display:none;">
       </table>
     </form>
 </body>

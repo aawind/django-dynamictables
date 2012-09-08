@@ -1,0 +1,9 @@
+# This file will be used for first start
+users: 
+    name: {type: char, text: name}
+    birthday: {type: date, text: birthday}
+    weight: {type: int, text: weight}
+products:
+    name: {type: char, text: name}
+    srok_godnosti: {type: date, text: srok_godnosti}
+    kalorii: {type: int, text: kalorii}

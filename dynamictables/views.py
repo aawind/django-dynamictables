@@ -5,6 +5,11 @@ from django.template import RequestContext
 from models import Table
 from forms import *
 
+import yaml
+
+cfg = yaml.load(open('test.yaml'))
+print cfg
+
 def main(request, template="main.html"):
     """
     Homepage - lists all tables.
@@ -18,6 +23,7 @@ def main(request, template="main.html"):
     return render(request, template, context)
     
 def form(request, template="form.html"):
+    print request
     """
     Formpage - get form by type.
     """
@@ -38,12 +44,15 @@ def form(request, template="form.html"):
     if request.method == 'POST':
         if f:
           f = f(request.POST)
+          print request.POST
           if f.is_valid():
               cd = f.cleaned_data
               print "data:", cd['field']
     else:
         if f:
           f = f()
+
+    print f
             
     context = {
       "form": f,

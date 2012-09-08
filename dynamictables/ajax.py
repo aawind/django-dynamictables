@@ -2,6 +2,7 @@ from django.utils import simplejson
 from dajaxice.decorators import dajaxice_register
 
 from models import *
+from forms import *
 
 @dajaxice_register
 def get_table(request, table):
@@ -54,13 +55,24 @@ def get_table(request, table):
         
     return simplejson.dumps({'message':'Hello World = '+str(table), 'columns':columns, 'rows':rows })
 
-"""
+
 from dajaxice.utils import deserialize_form
 
 @dajaxice_register
-def send_form(request, form):
-    form = ExampleForm(deserialize_form(form))
+def send_form(request, form, f_type, id, col, row):
+    print 'col:', col, "row:", row
+    #print "GET:", form
+    #print "-->", deserialize_form(form)
+    if f_type == 'C':
+        form = CharForm(form)
+    elif f_type == 'I':
+        form = IntForm(form)
+    elif f_type == 'D':
+        form = DateForm(form)
+    else:
+        return simplejson.dumps({'errors':['form_type'],'id':id})
+    #print "form:", form
     if form.is_valid():
-        ...
-    ...
-"""
+        return simplejson.dumps({'errors':[],'id':id})
+    return simplejson.dumps({'errors':['not_valid'],'id':id})
+
