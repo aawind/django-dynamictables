@@ -61,7 +61,7 @@ function DynamicTables(aTablePanel) {
         function fillTempValues(rowData) {
             for (var j=0; j < rowData.length; ++j) {
                 var id = rowData[j][CELL_ID_NUM];
-                for (var k=0; k < cols.length; ++k) {
+                for (var k=0; k < temp.length; ++k) {
                     if (temp[k].id == id) {
                         temp[k].value = rowData[j][CELL_VALUE_NUM];
                         break;
