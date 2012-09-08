@@ -7,7 +7,7 @@
 
 function DynamicTables() {
     var th = this;
-    var value_onclick = "onclick='enable_edit($(this));'";
+    var value_onclick = "onclick='dynamicTables.enable_edit($(this));'";
     var temp = [];
     var last_editor = new Object;
     var valuer = new Object;
