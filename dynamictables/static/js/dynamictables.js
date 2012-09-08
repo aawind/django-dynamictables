@@ -194,7 +194,7 @@ function DynamicTables() {
             var table = th.tablePanel.firstChild();
             for (var i=0; i<table.childNodes.length; ++i) {
                 var row = table.childNodes[i];
-                if (row.id==row_id) {
+                if (row.getAttribute('id')==row_id) {
                     return row;
                 }
             }
@@ -207,13 +207,13 @@ function DynamicTables() {
         newRow.innerHTML = getClearRowInner(-1);
         newRow.setAttribute("id", '-1');
         var table = th.tablePanel.firstChild;
-        table.appendChild(newRow);
+        table.insertBefore(newRow, table.lastChild);
+        //table.appendChild(newRow);
     }
     this.removeRow = function(row_id) {
         //try {
             var row = getRowById(row_id);
-            var table = th.tablePanel.firstChild;
-            table.removeChild(row);
+            row.parentNode.removeChild(row);
         //} catch (e) {}
     }
 
