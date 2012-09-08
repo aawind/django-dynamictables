@@ -5,8 +5,9 @@
 
 //{% load dajaxice_templatetags %}
 
-function DynamicTables() {
+function DynamicTables(aTablePanel) {
     var th = this;
+    var tablePanel = aTablePanel;
     var value_onclick = "onclick='enable_edit($(this));'";
     var temp = [];
     var last_editor = new Object;
@@ -25,7 +26,7 @@ function DynamicTables() {
     var ROW_DATA_NUM = 1;
     
     function fillTable(data) {
-        right_panel.innerHTML = "<table>" + getHeadHtml() + 
+        tablePanel.innerHTML = "<table>" + getHeadHtml() +
             getRowsHtml() + "</table>";
     }
     function getHeadHtml() {
@@ -173,13 +174,8 @@ function DynamicTables() {
         }
       
     }
-    function activate_table_by_id(id) {
-        Dajaxice.dynamictables.get_table(callback, {'table':id});
-    }
-    function activate_table($table) {
-        activate_table_by_id($table.attr('id'));
-    }
-    
+
+
     function validate(val, f_type, $cell) {
         valer.queue[valer.id]=$cell;
         var f = {'field':val+''};
@@ -194,6 +190,13 @@ function DynamicTables() {
         if (data.errors.length) color = "#ff0000";
         $cell.css("border", "1px solid "+color);
     }
+}
+
+DynamicTables.activateTableById = function(id) {
+    Dajaxice.dynamictables.get_table(fillTable, {'table':id});
+}
+DynamicTables.activateTable = function($table) {
+    this.activateTableById($table.attr('id'));
 }
         
 $(function(){

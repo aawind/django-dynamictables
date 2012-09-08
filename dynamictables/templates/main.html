@@ -2,7 +2,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <title>{% block title %}DinamicTables{% endblock %}</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/dynamictables.css">
@@ -15,27 +14,33 @@
     <!--script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script-->
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" ></script>
     <script src="http://cdn.jquerytools.org/1.2.5/form/jquery.tools.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
 
-    {% block extra_js %}{% endblock %}
-    
-    {% dajaxice_js_import %}
+    {% block extra_js %}
+        {% dajaxice_js_import %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
+    {% endblock %}
+
+    <script>
+        var dynamicTables = new DynamicTables(right_panel);
+    </script>
 </head>
 <body>
     <div id="current_edit" hidden="true"></div>
     <div id="datepicker_holder"><input id='datepicker' type='text' /></div>
     <div id="main">{% block main %}
-      {% for table in tables %}
-      <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="left_panel">
-          <h1><a id="{{ table.id }}" onclick="activate_table( $(this) );">{{ table }}</a></h1>
-		  {% if forloop.first %}<script>activate_table_by_id({{ table.id }});</script>{% endif %}
-      </div>
-      <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="right_panel">
-      </div>
-      {% empty %}
-      <p>There are currently no tables! Add one below.</p>
-      {% endfor %}
-      <br clear="all">
+        {% for table in tables %}
+        <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="left_panel">
+          <h1><a id="{{ table.id }}" onclick="dynamicTables.activateTable($(this));">{{ table }}</a></h1>
+          {% if forloop.first %}
+              <script>dynamicTables.activateTableById({{ table.id }});</script>
+          {% endif %}
+        </div>
+        <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="right_panel">
+        </div>
+        {% empty %}
+        <p>There are currently no tables! Add one below.</p>
+        {% endfor %}
+        <br clear="all">
     {% endblock %}</div>
     {% block form %}{% endblock %}
 </body>
