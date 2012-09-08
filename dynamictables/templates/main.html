@@ -15,9 +15,10 @@
     <!--script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script-->
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" ></script>
     <script src="http://cdn.jquerytools.org/1.2.5/form/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
     
     <script>
-        var value_onclick = "onclick='enable_edit($(this));'";
+        /*var value_onclick = "onclick='enable_edit($(this));'";
         var columns_types = [];
         var last_editor = new Object;
         //last_editor.valid = true;
@@ -199,18 +200,18 @@
 		
     </script>
     <script type="text/javascript">
-    $(function(){
+    /*$(function(){
       $.datepicker.setDefaults(
         $.extend($.datepicker.regional["ru"])
       );
       $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
       $('#datepicker').blur(function (e) {validate_editor();});
-    });
+    });*/
     </script>
 
     {% block extra_js %}{% endblock %}
     
-    {% dajaxice_js_import %}
+    {% dajaxice_js_import %}*/
 </head>
 <body>
     <div id="current_edit" hidden="true"></div>
