@@ -131,7 +131,7 @@ function DynamicTables() {
         }
         return false;
     }
-    function enable_edit($cell) {
+    th.enable_edit = function($cell) {
         var row = $cell.parent().attr('id');
         var col = $cell.attr('id');
         var col_type = getColumnType(col);
