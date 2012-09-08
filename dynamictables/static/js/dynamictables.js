@@ -206,13 +206,13 @@ function DynamicTables() {
         var newRow = document.createElement('tr');
         newRow.innerHTML = getClearRowInner(-1);
         newRow.setAttribute("id", '-1');
-        var table = th.tablePanel.firstChild();
+        var table = th.tablePanel.firstChild;
         table.appendChild(newRow);
     }
     this.removeRow = function(row_id) {
         //try {
             var row = getRowById(row_id);
-            var table = th.tablePanel.firstChild();
+            var table = th.tablePanel.firstChild;
             table.removeChild(row);
         //} catch (e) {}
     }
