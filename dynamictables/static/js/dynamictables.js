@@ -193,20 +193,21 @@ function DynamicTables(aTablePanel) {
         }
         $cell.css("border", "1px solid "+color);
     }
-}
-DynamicTables.pushTableId = function(id) {
-    table_id_list.push(id);
-}
-DynamicTables.activateFirstTable = function() {
-    try {
-        this.activateTableById(table_id_list[0]);
-    } catch(e) {}
-}
-DynamicTables.activateTableById = function(id) {
-    Dajaxice.dynamictables.get_table(fillTable, {'table':id});
-}
-DynamicTables.activateTable = function($table) {
-    this.activateTableById($table.attr('id'));
+
+    this.pushTableId = function(id) {
+        table_id_list.push(id);
+    }
+    this.activateFirstTable = function() {
+        try {
+            th.activateTableById(table_id_list[0]);
+        } catch(e) {}
+    }
+    this.activateTableById = function(id) {
+        Dajaxice.dynamictables.get_table(fillTable, {'table':id});
+    }
+    this.activateTable = function($table) {
+        th.activateTableById($table.attr('id'));
+    }
 }
         
 $(function(){
