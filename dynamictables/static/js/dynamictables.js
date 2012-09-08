@@ -5,9 +5,8 @@
 
 //{% load dajaxice_templatetags %}
 
-function DynamicTables(aTablePanel) {
+function DynamicTables() {
     var th = this;
-    var tablePanel = aTablePanel;
     var value_onclick = "onclick='enable_edit($(this));'";
     var temp = [];
     var last_editor = new Object;
@@ -27,8 +26,10 @@ function DynamicTables(aTablePanel) {
     var ROW_DATA_NUM = 1;
     
     function fillTable(data) {
-        tablePanel.innerHTML = "<table>" + getHeadHtml(data) +
-            getRowsHtml(data) + "</table>";
+        try {
+            th.tablePanel.innerHTML = "<table>" + getHeadHtml(data) +
+                getRowsHtml(data) + "</table>";
+        } catch (e) {}
     }
     function getHeadHtml(data) {
         var head = "";
