@@ -54,7 +54,7 @@ function DynamicTables(aTablePanel) {
         var allRowsHtml = "";
         
         function clearTempValues() {
-            for (var j=0; j < temp.data.length; ++j) {
+            for (var j=0; j < temp.length; ++j) {
                 temp[j].value = false;
             }
         }
