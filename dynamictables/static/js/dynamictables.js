@@ -78,8 +78,8 @@ function DynamicTables(aTablePanel) {
             return rowHtml + "</tr>";
         }
         function getRowHtml(row) {
-            clearColsValues();
-            fillColsValues(row[ROW_DATA_NUM]);
+            clearTempValues();
+            fillTempValues(row[ROW_DATA_NUM]);
             return getTempSumToRow(row);
         }
 
@@ -138,8 +138,8 @@ function DynamicTables(aTablePanel) {
         if (isOnInput($cell)) {
             return;
         }
-      
-        current_edit.innerHTML = $cell.text();
+
+        last_editor.value = $cell.text();
       
         last_editor.type = col_type;
         
@@ -151,7 +151,7 @@ function DynamicTables(aTablePanel) {
         }
         function enableDateEditor($cell) {
             var $dp = $('#datepicker_holder>input');
-            $dp.val(current_edit.innerHTML);
+            $dp.val(last_editor.value);
 
             $dp.datepicker( "setDate" , $cell.text() );
             $cell.text('');
