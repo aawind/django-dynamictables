@@ -76,6 +76,7 @@ function DynamicTables() {
                 rowHtml += "<td id='" + temp[j].id + 
                     "' " + value_onclick + ">" + temp[j].value + "</td>";
             }
+            rowHtml += "<td><a href='#'>Del row...</a></td>";
             return rowHtml + "</tr>";
         }
         function getRowHtml(row) {
@@ -86,7 +87,8 @@ function DynamicTables() {
 
         for (var i=0; i < data.rows.length; ++i) {
             allRowsHtml += getRowHtml(data.rows[i]);
-        }        
+        }
+        allRowsHtml += "<tr><td><a href='#'>Add row...</a></td></tr>";
         return allRowsHtml;
     }
     function getColumnType(columnId) {

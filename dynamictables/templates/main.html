@@ -29,7 +29,7 @@
     <div id="main">{% block main %}
         <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="left_panel">
         {% for table in tables %}
-            <h1><a id="{{ table.id }}" onclick="dynamicTables.activateTable($(this));">{{ table }}</a></h1>
+            <h2><a id="{{ table.id }}" href="#" onclick="dynamicTables.activateTable($(this));">{{ table }}</a></h2>
             {% if forloop.first %}
             {% endif %}
             <script>dynamicTables.pushTableId({{ table.id }});</script>
