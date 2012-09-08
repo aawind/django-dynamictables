@@ -97,7 +97,7 @@ function DynamicTables() {
         }
         return false;
     }
-    function validate_editor() {
+    this.validate_editor = function() {
         switch (last_editor.type) {
         case 'C':
         case 'I':
@@ -131,7 +131,7 @@ function DynamicTables() {
         }
         return false;
     }
-    th.enable_edit = function($cell) {
+    this.enable_edit = function($cell) {
         var row = $cell.parent().attr('id');
         var col = $cell.attr('id');
         var col_type = getColumnType(col);
@@ -145,7 +145,7 @@ function DynamicTables() {
         last_editor.type = col_type;
         
         function enableSimpleEditor($cell, type) {
-            $cell.html("<input type='"+type+"' value='"+$cell.text()+"' onblur='validate_editor();' />");
+            $cell.html("<input type='"+type+"' value='"+$cell.text()+"' onblur='dynamicTables.validate_editor();' />");
             last_editor.$cell = $cell;
             last_editor.$instance = $cell.children()[0];
             last_editor.$instance.focus();
@@ -210,14 +210,6 @@ function DynamicTables() {
         th.activateTableById($table.attr('id'));
     }
 }
-        
-$(function(){
-  $.datepicker.setDefaults(
-    $.extend($.datepicker.regional["ru"])
-  );
-  $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-  $('#datepicker').blur(function (e) {validate_editor();});
-});
 
 //{% dajaxice_js_import %}
 

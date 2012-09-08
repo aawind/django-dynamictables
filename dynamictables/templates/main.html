@@ -43,6 +43,13 @@
     {% endblock %}</div>
     {% block form %}{% endblock %}
     <script>
+        $(function(){
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+            $('#datepicker').blur(function (e) {dynamicTables.validate_editor();});
+        });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
     </script>
