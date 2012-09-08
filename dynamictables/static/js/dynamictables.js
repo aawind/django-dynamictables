@@ -27,10 +27,10 @@ function DynamicTables(aTablePanel) {
     var ROW_DATA_NUM = 1;
     
     function fillTable(data) {
-        tablePanel.innerHTML = "<table>" + getHeadHtml() +
-            getRowsHtml() + "</table>";
+        tablePanel.innerHTML = "<table>" + getHeadHtml(data) +
+            getRowsHtml(data) + "</table>";
     }
-    function getHeadHtml() {
+    function getHeadHtml(data) {
         var head = "";
         temp.length = 0;
         
@@ -50,7 +50,7 @@ function DynamicTables(aTablePanel) {
         }
         return "<tr>"+head+"</tr>";
 	}
-    function getRowsHtml() {
+    function getRowsHtml(data) {
         var allRowsHtml = "";
         
         function clearTempValues() {
