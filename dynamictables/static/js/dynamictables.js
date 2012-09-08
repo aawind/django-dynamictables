@@ -11,9 +11,10 @@ function DynamicTables(aTablePanel) {
     var value_onclick = "onclick='enable_edit($(this));'";
     var temp = [];
     var last_editor = new Object;
-    var valer = new Object;
-    valer.queue = {};
-    valer.id = 0;
+    var valuer = new Object;
+    valuer.queue = {};
+    valuer.id = 0;
+    var table_id_list = [];
     
     var COL_ID_NUM = 1;
     var COL_TITLE_NUM = 0;
@@ -177,21 +178,30 @@ function DynamicTables(aTablePanel) {
 
 
     function validate(val, f_type, $cell) {
-        valer.queue[valer.id]=$cell;
+        valuer.queue[valuer.id]=$cell;
         var f = {'field':val+''};
-        Dajaxice.dynamictables.send_form(form_result, {'form':f,
-            'f_type':f_type, 'id':valer.id, 'col':$cell.attr('id'), 'row':$cell.parent().attr('id')});
-        ++(valer.id);
+        Dajaxice.dynamictables.send_form(updateCell, {'form':f,
+            'f_type':f_type, 'id':valuer.id, 'col':$cell.attr('id'), 'row':$cell.parent().attr('id')});
+        ++(valuer.id);
     }
 
-    function form_result(data) {
-        $cell = valer.queue[data.id];
+    function updateCell(data) {
+        var $cell = valuer.queue[data.id];
         var color = "#009900";
-        if (data.errors.length) color = "#ff0000";
+        if (data.errors.length) {
+            color = "#ff0000";
+        }
         $cell.css("border", "1px solid "+color);
     }
 }
-
+DynamicTables.pushTableId = function(id) {
+    table_id_list.push(id);
+}
+DynamicTables.activateFirstTable = function() {
+    try {
+        this.activateTableById(table_id_list[0]);
+    } catch(e) {}
+}
 DynamicTables.activateTableById = function(id) {
     Dajaxice.dynamictables.get_table(fillTable, {'table':id});
 }

@@ -19,18 +19,20 @@
         {% dajaxice_js_import %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
     {% endblock %}
-
+    <script>
+        var dynamicTables = new DynamicTables();
+    </script>
 </head>
-<body onload="var dynamicTables = new DynamicTables(right_panel);">
+<body onload="">
     <div id="current_edit" hidden="true"></div>
     <div id="datepicker_holder"><input id='datepicker' type='text' /></div>
     <div id="main">{% block main %}
         {% for table in tables %}
         <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="left_panel">
-          <h1><a id="{{ table.id }}" onclick="dynamicTables.activateTable($(this));">{{ table }}</a></h1>
-          {% if forloop.first %}
-              <script>dynamicTables.activateTableById({{ table.id }});</script>
-          {% endif %}
+            <h1><a id="{{ table.id }}" onclick="dynamicTables.activateTable($(this));">{{ table }}</a></h1>
+            {% if forloop.first %}
+            {% endif %}
+            <script>dynamicTables.pushTableId({{ table.id }});</script>
         </div>
         <div class="panel ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="right_panel">
         </div>
@@ -40,4 +42,7 @@
         <br clear="all">
     {% endblock %}</div>
     {% block form %}{% endblock %}
+    <script>
+        dynamicTables.activateFirstTable();
+    </script>
 </body>
