@@ -51,14 +51,27 @@ function DynamicTables() {
         }
         return "<tr>"+head+"</tr>";
 	}
+    function clearTempValues() {
+        for (var j=0; j < temp.length; ++j) {
+            temp[j].value = '';
+        }
+    }
+    function generateRowInner(row_id) {
+        var rowHtml = "<tr id='" + row_id+ "'>";
+        for (var j=0; j < temp.length; ++j) {
+            rowHtml += "<td id='" + temp[j].id +
+                "' " + value_onclick + ">" + temp[j].value + "</td>";
+        }
+        rowHtml += "<td><a href='#' onclick='dynamicTables.removeRow("+row_id+");'>Del row...</a></td>";
+        return rowHtml + "</tr>";
+    }
+    function getClearRowInner(row_id) {
+        clearTempValues();
+        return generateRowInner(row_id);
+    }
     function getRowsHtml(data) {
         var allRowsHtml = "";
-        
-        function clearTempValues() {
-            for (var j=0; j < temp.length; ++j) {
-                temp[j].value = false;
-            }
-        }
+
         function fillTempValues(rowData) {
             for (var j=0; j < rowData.length; ++j) {
                 var id = rowData[j][CELL_ID_NUM];
@@ -71,12 +84,9 @@ function DynamicTables() {
             }
         }
         function getTempSumToRow(row) {
-            var rowHtml = "<tr id='" + row[ROW_ID_NUM]+ "'>"; 
-            for (var j=0; j < temp.length; ++j) {
-                rowHtml += "<td id='" + temp[j].id + 
-                    "' " + value_onclick + ">" + temp[j].value + "</td>";
-            }
-            rowHtml += "<td><a href='#'>Del row...</a></td>";
+            var row_id = row[ROW_ID_NUM];
+            var rowHtml = "<tr id='" + row_id+ "'>";
+            rowHtml += generateRowInner(row_id);
             return rowHtml + "</tr>";
         }
         function getRowHtml(row) {
@@ -88,7 +98,7 @@ function DynamicTables() {
         for (var i=0; i < data.rows.length; ++i) {
             allRowsHtml += getRowHtml(data.rows[i]);
         }
-        allRowsHtml += "<tr><td><a href='#'>Add row...</a></td></tr>";
+        allRowsHtml += "<tr><td><a href='#' onclick='dynamicTables.appendRow();'>Add row...</a></td></tr>";
         return allRowsHtml;
     }
     function getColumnType(columnId) {
@@ -177,6 +187,33 @@ function DynamicTables() {
             break;
         }
       
+    }
+
+    function getRowById(row_id) {
+        try {
+            var table = th.tablePanel.firstChild();
+            for (var i=0; i<table.childNodes.length; ++i) {
+                var row = table.childNodes[i];
+                if (row.id==row_id) {
+                    return row;
+                }
+            }
+        } catch (e) {}
+        return false;
+    }
+
+    this.appendRow = function() {
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = getClearRowInner(-1);
+        newRow.setAttribute("id", '-1');
+        var table = th.tablePanel.appendChild();
+    }
+    this.removeRow = function(row_id) {
+        try {
+            var row = getRowById(row_id);
+            var table = th.tablePanel.firstChild();
+            table.removeChild(row);
+        } catch (e) {}
     }
 
 
