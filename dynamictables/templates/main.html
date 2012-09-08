@@ -20,11 +20,8 @@
         <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
     {% endblock %}
 
-    <script>
-        var dynamicTables = new DynamicTables(right_panel);
-    </script>
 </head>
-<body>
+<body onload="var dynamicTables = new DynamicTables(right_panel);">
     <div id="current_edit" hidden="true"></div>
     <div id="datepicker_holder"><input id='datepicker' type='text' /></div>
     <div id="main">{% block main %}
