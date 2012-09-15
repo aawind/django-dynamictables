@@ -257,10 +257,10 @@ function Editor() {
         th.value = $cell.text();
         th.type = col_type;
         var type_html = getTypeHtml(th.type);
-        var editor = getEditorByType(th.type);
+        var editor = th.getEditorByType(th.type);
         editor.enableEditor($cell, type_html);
     }
-    function getEditorByType(type) {
+    th.getEditorByType = function(type) {
         switch (type) {
             case 'C':
             case 'I':
