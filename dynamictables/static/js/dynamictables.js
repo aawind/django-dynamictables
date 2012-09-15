@@ -220,6 +220,9 @@ function EditorValidator(mainEditor) {
         }
         $cell.css("border", "1px solid "+color);
     }
+    th.getMainEditor = function() {
+        return mainEditor;
+    }
 }
 
 function SimpleEditorValidator(mainValidator) {
@@ -287,9 +290,10 @@ function SimpleEditor(mainValidator) {
 
     th.enableEditor = function($cell, type) {
         $cell.html("<input type='"+type+"' value='"+$cell.text()+"' onblur='dynamicTables.validate_editor();' />");
-        th.editor.$cell = $cell;
-        th.editor.$instance = $cell.children()[0];
-        th.editor.$instance.focus();
+        var editor = mainValidator.getMainEditor();
+        editor.$cell = $cell;
+        editor.$instance = $cell.children()[0];
+        editor.$instance.focus();
     }
 }
 function DateEditor(mainValidator) {
@@ -299,9 +303,10 @@ function DateEditor(mainValidator) {
 
     th.enableEditor = function($cell) {
         var $dp = $('#datepicker_holder>input');
-        $dp.val(th.editor.value);
+        var editor = mainValidator.getMainEditor();
+        $dp.val(editor.value);
 
-        $dp.datepicker( "setDate" , $cell.text() );
+        $dp.datepicker("setDate" , $cell.text());
         $cell.text('');
 
         $dp.detach().prependTo($cell);
