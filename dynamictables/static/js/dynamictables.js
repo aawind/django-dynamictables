@@ -123,6 +123,7 @@ function RowsDrawer(colsBuffer) {
 function RowDrawer(colsBuffer) {
     this.draw = function(row) {
         colsBuffer.clearTempValues();
+        alert(DynamicTablesConsts.ROW_DATA_NUM);
         colsBuffer.fillTempValues(row[DynamicTablesConsts.ROW_DATA_NUM]);
         return getTempSumToRow(row);
     }
