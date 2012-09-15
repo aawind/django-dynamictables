@@ -317,7 +317,7 @@ function Cell() {
     this.enable_edit = function() {
         var row = th.$cell.parent().attr('id');
         var col = th.$cell.attr('id');
-        var col_type = th.colsBuffer.getColumnType(columnId);
+        var col_type = th.colsBuffer.getColumnType(col);
         //getColumnType(col);
 
         if (isOnInput()) {
