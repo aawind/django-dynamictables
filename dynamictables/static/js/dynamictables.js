@@ -227,7 +227,7 @@ function SimpleEditorValidator(mainValidator) {
     th.validate_edit = function() {
         var editor = mainValidator.getMainEditor();
         var val = editor.$instance.value;
-        th.editor.$cell.text(val);
+        editor.$cell.text(val);
         mainValidator.doValidate(val, editor.type, editor.$cell);
     }
 }
@@ -237,14 +237,15 @@ function DateEditorValidator(mainValidator) {
 
     th.validate_edit = function() {
         var $dph = $('#datepicker_holder');
-        th.editor.$instance.detach().prependTo($dph);
-        var dt = th.editor.$instance.datepicker('getDate');
+        var editor = mainValidator.getMainEditor();
+        editor.$instance.detach().prependTo($dph);
+        var dt = editor.$instance.datepicker('getDate');
         var dt_s = $.datepicker.formatDate(
             'yy-mm-dd',
-            th.editor.$instance.datepicker("getDate")
+            editor.$instance.datepicker("getDate")
         );
-        th.editor.$cell.text(dt_s);
-        mainValidator.doValidate(dt_s, 'D', th.editor.$cell);
+        editor.$cell.text(dt_s);
+        mainValidator.doValidate(dt_s, 'D', editor.$cell);
     }
 }
 
