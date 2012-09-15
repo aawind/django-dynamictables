@@ -27,7 +27,7 @@ function DynamicTables() {
     var editor = new Editor();
     var cell = new Cell();
     cell.editor = editor;
-    cell.temp = tableDrawer.temp;
+    cell.colsBuffer = tableDrawer.colsBuffer;
 
     th.validate_editor = function() {
         editor.validator.validate();
@@ -179,6 +179,14 @@ function ColsBuffer() {
         }
         return html;
     }
+    th.getColumnType = function(columnId) {
+        for (var i=0; i<th.temp.length; ++i) {
+            if (th.temp[i].id==columnId) {
+                return th.temp[i].type;
+            }
+        }
+        return false;
+    }
 }
 
 function EditorValidator(mainEditor) {
@@ -309,20 +317,13 @@ function Cell() {
     this.enable_edit = function() {
         var row = th.$cell.parent().attr('id');
         var col = th.$cell.attr('id');
-        var col_type = getColumnType(col);
+        var col_type = th.colsBuffer.getColumnType(columnId);
+        //getColumnType(col);
 
         if (isOnInput()) {
             return;
         }
         th.editor.enableEditorInCell(th.$cell, col_type);
-    }
-    function getColumnType(columnId) {
-        for (var i=0; i<th.temp.length; ++i) {
-            if (th.temp[i].id==columnId) {
-                return th.temp[i].type;
-            }
-        }
-        return false;
     }
     function isOnInput() {
         var tg = false;
