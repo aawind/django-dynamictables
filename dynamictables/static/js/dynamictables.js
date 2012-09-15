@@ -225,9 +225,10 @@ function SimpleEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
-        var val = th.editor.$instance.value;
+        var editor = mainValidator.getMainEditor();
+        var val = editor.$instance.value;
         th.editor.$cell.text(val);
-        mainValidator.doValidate(val, th.editor.type, th.editor.$cell);
+        mainValidator.doValidate(val, editor.type, editor.$cell);
     }
 }
 
