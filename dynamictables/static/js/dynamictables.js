@@ -314,8 +314,8 @@ function DateEditor(mainValidator) {
 
         $dp.detach().prependTo($cell);
         $dp.focus();
-        th.editor.$instance = $dp;
-        th.editor.$cell = $cell;
+        editor.$instance = $dp;
+        editor.$cell = $cell;
     }
 }
 
