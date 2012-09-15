@@ -70,7 +70,7 @@ function TableDrawer() {
     var headDrawer =  new HeadDrawer(th.colsBuffer);
     var rowsDrawer = new RowsDrawer(th.colsBuffer);
 
-    function draw() {
+    th.draw = function() {
         try {
             headDrawer.data = th.data;
             rowsDrawer.data = th.data;
