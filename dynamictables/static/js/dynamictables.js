@@ -255,10 +255,10 @@ function Editor() {
     var dateEditor = new DateEditor(th.validator);
 
     th.enableEditorInCell = function($cell, col_type) {
-        th.editor.value = $cell.text();
-        th.editor.type = col_type;
-        var type_html = getTypeHtml(th.editor.type);
-        var editor = getEditorByType(th.editor.type);
+        th.value = $cell.text();
+        th.type = col_type;
+        var type_html = getTypeHtml(th.type);
+        var editor = getEditorByType(th.type);
         editor.enableEditor($cell, type_html);
     }
     function getEditorByType(type) {
