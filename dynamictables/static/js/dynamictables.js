@@ -37,10 +37,10 @@ function DynamicTables() {
         cell.enable_edit();
     }
     th.appendRow = function() {
-        tableDrawer.rowsEditor.appendRow();
+        tableDrawer.rowsDrawer.appendRow();
     }
     th.removeRow = function(row_id) {
-        tableDrawer.rowsEditor.removeRow();
+        tableDrawer.rowsDrawer.removeRow();
     }
     th.pushTableId = function(id) {
         th.table_id_list.push(id);
@@ -65,17 +65,17 @@ function DynamicTables() {
 
 function TableDrawer() {
     var th = this;
-    th.rowsEditor = new RowsEditor();
+    //th.rowsEditor = new RowsDrawer();
     th.colsBuffer = new ColsBuffer();
     var headDrawer =  new HeadDrawer(th.colsBuffer);
-    var rowsDrawer = new RowsDrawer(th.colsBuffer);
+    th.rowsDrawer = new RowsDrawer(th.colsBuffer);
 
     th.draw = function() {
         //try {
             headDrawer.data = th.data;
-            rowsDrawer.data = th.data;
+            th.rowsDrawer.data = th.data;
             th.tablePanel.innerHTML = "<table>" + headDrawer.draw() +
-                rowsDrawer.draw() + "</table>";
+                th.rowsDrawer.draw() + "</table>";
         //} catch (e) {}
     }
 }
@@ -117,6 +117,32 @@ function RowsDrawer(colsBuffer) {
         }
         allRowsHtml += "<tr><td><a href='#' onclick='dynamicTables.appendRow();'>Add row...</a></td></tr>";
         return allRowsHtml;
+    }
+    this.appendRow = function() {
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = rowDrawer.getClearRowInner(-1);
+        newRow.setAttribute("id", '-1');
+        var table = th.tablePanel.firstChild;
+        table.insertBefore(newRow, table.lastChild);
+        //table.appendChild(newRow);
+    }
+    this.removeRow = function(row_id) {
+        //try {
+        var row = getRowById(row_id);
+        row.parentNode.removeChild(row);
+        //} catch (e) {}
+    }
+    function getRowById(row_id) {
+        try {
+            var table = th.tablePanel.firstChild();
+            for (var i=0; i<table.childNodes.length; ++i) {
+                var row = table.childNodes[i];
+                if (row.getAttribute('id')==row_id) {
+                    return row;
+                }
+            }
+        } catch (e) {}
+        return false;
     }
 }
 
@@ -344,7 +370,7 @@ function Cell() {
         return false;
     }
 }
-
+/*
 function RowsEditor() {
     var th = this;
     var rowDrawer = new RowDrawer();
@@ -375,7 +401,7 @@ function RowsEditor() {
         } catch (e) {}
         return false;
     }
-}
+}*/
 
 
 //{% dajaxice_js_import %}
