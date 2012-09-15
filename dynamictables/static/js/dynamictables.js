@@ -201,7 +201,7 @@ function EditorValidator(mainEditor) {
         mainEditor.clear_last_editor();
     }
 
-    function doValidate(val, f_type, $cell) {
+    th.doValidate = function(val, f_type, $cell) {
         th.valuer.queue[th.valuer.id]=$cell;
         var f = {'field':val+''};
         Dajaxice.dynamictables.send_form(updateCell, {'form':f,
