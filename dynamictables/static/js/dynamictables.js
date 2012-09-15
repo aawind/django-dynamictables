@@ -21,7 +21,7 @@ function DynamicTablesConsts() {
 
 function DynamicTables() {
     var th = this;
-    this.table_id_list = [];
+    th.table_id_list = [];
 
     var tableDrawer = new TableDrawer();
     var editor = new Editor();
@@ -29,11 +29,6 @@ function DynamicTables() {
     cell.editor = editor;
     cell.temp = tableDrawer.temp;
 
-    function fillTableFromAjax(data) {
-        tableDrawer.data = data;
-        tableDrawer.tablePanel = th.tablePanel;
-        tableDrawer.draw();
-    }
     this.validate_editor = function() {
         editor.validator.validate();
     }
@@ -61,6 +56,11 @@ function DynamicTables() {
     this.activateTable = function($table) {
         th.activateTableById($table.attr('id'));
     }
+    function fillTableFromAjax(data) {
+        tableDrawer.data = data;
+        tableDrawer.tablePanel = th.tablePanel;
+        tableDrawer.draw();
+    }
 }
 
 function TableDrawer() {
@@ -71,12 +71,12 @@ function TableDrawer() {
     var rowsDrawer = new RowsDrawer(th.colsBuffer);
 
     th.draw = function() {
-        try {
+        //try {
             headDrawer.data = th.data;
             rowsDrawer.data = th.data;
             th.tablePanel.innerHTML = "<table>" + headDrawer.draw() +
                 rowsDrawer.draw() + "</table>";
-        } catch (e) {}
+        //} catch (e) {}
     }
 }
 
