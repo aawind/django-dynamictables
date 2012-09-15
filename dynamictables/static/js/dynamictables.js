@@ -121,9 +121,10 @@ function RowsDrawer(colsBuffer) {
 }
 
 function RowDrawer(colsBuffer) {
+    var colsBuffer = colsBuffer;
+
     this.draw = function(row) {
         colsBuffer.clearTempValues();
-        alert(DynamicTablesConsts_ROW_DATA_NUM);
         colsBuffer.fillTempValues(row[DynamicTablesConsts_ROW_DATA_NUM]);
         return getTempSumToRow(row);
     }
