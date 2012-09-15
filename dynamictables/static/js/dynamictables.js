@@ -196,15 +196,11 @@ function EditorValidator(mainEditor) {
     th.valuer.id = 0;
 
     th.validate = function() {
-        var editor = mainEditor.getEditorByType(th.editor.type);
+        var editor = mainEditor.getEditorByType(mainEditor.type);
         editor.validator.validate_edit();
-        clear_last_editor();
+        mainEditor.clear_last_editor();
     }
-    function clear_last_editor() {
-        th.editor.type = false;
-        th.editor.$cell = false;
-        th.editor.$instance = false;
-    }
+
     function doValidate(val, f_type, $cell) {
         th.valuer.queue[th.valuer.id]=$cell;
         var f = {'field':val+''};
@@ -281,6 +277,11 @@ function Editor() {
             return 'int';
         }
         return '';
+    }
+    th.clear_last_editor = function() {
+        th.type = false;
+        th.$cell = false;
+        th.$instance = false;
     }
 }
 function SimpleEditor(mainValidator) {
