@@ -33,7 +33,7 @@ function DynamicTables() {
         editor.validator.validate();
     }
     th.enable_edit = function($cell) {
-        cell.$cell = cell;
+        cell.$cell = $cell;
         cell.enable_edit();
     }
     th.appendRow = function() {
@@ -121,8 +121,6 @@ function RowsDrawer(colsBuffer) {
 }
 
 function RowDrawer(colsBuffer) {
-    var colsBuffer = colsBuffer;
-
     this.draw = function(row) {
         colsBuffer.clearTempValues();
         colsBuffer.fillTempValues(row[DynamicTablesConsts_ROW_DATA_NUM]);
