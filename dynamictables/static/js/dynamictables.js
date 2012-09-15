@@ -5,19 +5,19 @@
 
 //{% load dajaxice_templatetags %}
 
-function DynamicTablesConsts() {
-    this.COL_ID_NUM = 1;
-    this.COL_TITLE_NUM = 0;
-    this.COL_TYPE_NUM = 2;
+//function DynamicTablesConsts() {
+    DynamicTablesConsts_COL_ID_NUM = 1;
+    DynamicTablesConsts_COL_TITLE_NUM = 0;
+    DynamicTablesConsts_COL_TYPE_NUM = 2;
 
-    this.CELL_VALUE_NUM = 1;
-    this.CELL_ID_NUM = 0;
+    DynamicTablesConsts_CELL_VALUE_NUM = 1;
+    DynamicTablesConsts_CELL_ID_NUM = 0;
 
-    this.ROW_ID_NUM = 0;
-    this.ROW_DATA_NUM = 1;
+    DynamicTablesConsts_ROW_ID_NUM = 0;
+    DynamicTablesConsts_ROW_DATA_NUM = 1;
 
-    this.VALUE_ONCLICK = "onclick='dynamicTables.enable_edit($(this));'";
-}
+    DynamicTablesConsts_VALUE_ONCLICK = "onclick='dynamicTables.enable_edit($(this));'";
+//}
 
 function DynamicTables() {
     var th = this;
@@ -99,9 +99,9 @@ function HeadDrawer(colsBuffer) {
         colsBuffer.push(cellData);
     }
     function CellData(cellArray) {
-        this.id = cellArray[DynamicTablesConsts.COL_ID_NUM];
-        this.title = cellArray[DynamicTablesConsts.COL_TITLE_NUM];
-        this.type = cellArray[DynamicTablesConsts.COL_TYPE_NUM];
+        this.id = cellArray[DynamicTablesConsts_COL_ID_NUM];
+        this.title = cellArray[DynamicTablesConsts_COL_TITLE_NUM];
+        this.type = cellArray[DynamicTablesConsts_COL_TYPE_NUM];
     }
 }
 
@@ -123,12 +123,12 @@ function RowsDrawer(colsBuffer) {
 function RowDrawer(colsBuffer) {
     this.draw = function(row) {
         colsBuffer.clearTempValues();
-        alert(DynamicTablesConsts.ROW_DATA_NUM);
-        colsBuffer.fillTempValues(row[DynamicTablesConsts.ROW_DATA_NUM]);
+        alert(DynamicTablesConsts_ROW_DATA_NUM);
+        colsBuffer.fillTempValues(row[DynamicTablesConsts_ROW_DATA_NUM]);
         return getTempSumToRow(row);
     }
     function getTempSumToRow(row) {
-        var row_id = row[DynamicTablesConsts.ROW_ID_NUM];
+        var row_id = row[DynamicTablesConsts_ROW_ID_NUM];
         var rowHtml = "<tr id='" + row_id+ "'>";
         rowHtml += generateRowInner(row_id);
         return rowHtml + "</tr>";
@@ -162,10 +162,10 @@ function ColsBuffer() {
     }
     th.fillTempValues = function(rowData) {
         for (var j=0; j < rowData.length; ++j) {
-            var id = rowData[j][DynamicTablesConsts.CELL_ID_NUM];
+            var id = rowData[j][DynamicTablesConsts_CELL_ID_NUM];
             for (var k=0; k < th.temp.length; ++k) {
                 if (th.temp[k].id == id) {
-                    th.temp[k].value = rowData[j][DynamicTablesConsts.CELL_VALUE_NUM];
+                    th.temp[k].value = rowData[j][DynamicTablesConsts_CELL_VALUE_NUM];
                     break;
                 }
             }
@@ -175,7 +175,7 @@ function ColsBuffer() {
         var html = '';
         for (var j=0; j < th.temp.length; ++j) {
             html += "<td id='" + th.temp[j].id +
-                "' " + DynamicTablesConsts.VALUE_ONCLICK + ">"
+                "' " + DynamicTablesConsts_VALUE_ONCLICK + ">"
                 + th.temp[j].value + "</td>";
         }
         return html;
