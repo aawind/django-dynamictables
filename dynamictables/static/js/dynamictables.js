@@ -29,31 +29,31 @@ function DynamicTables() {
     cell.editor = editor;
     cell.temp = tableDrawer.temp;
 
-    this.validate_editor = function() {
+    th.validate_editor = function() {
         editor.validator.validate();
     }
-    this.enable_edit = function($cell) {
+    th.enable_edit = function($cell) {
         cell.$cell = cell;
         cell.enable_edit();
     }
-    this.appendRow = function() {
+    th.appendRow = function() {
         tableDrawer.rowsEditor.appendRow();
     }
-    this.removeRow = function(row_id) {
+    th.removeRow = function(row_id) {
         tableDrawer.rowsEditor.removeRow();
     }
-    this.pushTableId = function(id) {
+    th.pushTableId = function(id) {
         th.table_id_list.push(id);
     }
-    this.activateFirstTable = function() {
+    th.activateFirstTable = function() {
         try {
             th.activateTableById(th.table_id_list[0]);
         } catch(e) {}
     }
-    this.activateTableById = function(id) {
+    th.activateTableById = function(id) {
         Dajaxice.dynamictables.get_table(fillTableFromAjax, {'table':id});
     }
-    this.activateTable = function($table) {
+    th.activateTable = function($table) {
         th.activateTableById($table.attr('id'));
     }
     function fillTableFromAjax(data) {
@@ -85,7 +85,7 @@ function HeadDrawer(colsBuffer) {
     th.colsBuffer = colsBuffer;
     var head = "";
 
-    function draw() {
+    th.draw = function() {
         head = "";
         th.colsBuffer.clear();
         for (var i=0; i < th.data.columns.length; ++i) {
@@ -109,7 +109,7 @@ function RowsDrawer(colsBuffer) {
     var th = this;
     var rowDrawer = new RowDrawer(colsBuffer);
 
-    this.draw = function() {
+    th.draw = function() {
         var allRowsHtml = "";
         for (var i=0; i < th.data.rows.length; ++i) {
             allRowsHtml += rowDrawer.draw(th.data.rows[i]);
