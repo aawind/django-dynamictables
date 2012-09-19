@@ -41,7 +41,7 @@ function DynamicTables() {
         tableDrawer.rowsDrawer.appendRow();
     }
     th.removeRow = function(row_id) {
-        tableDrawer.rowsDrawer.removeRow();
+        tableDrawer.rowsDrawer.removeRow(row_id);
     }
     th.pushTableId = function(id) {
         th.table_id_list.push(id);
