@@ -124,10 +124,9 @@ function RowsDrawer(colsBuffer) {
         var newRow = document.createElement('tr');
         newRow.innerHTML = rowDrawer.getClearRowInner(-1);
         newRow.setAttribute("id", '-1');
-        var table = th.tablePanel.firstChild;
-        var tbody = table.firstChild;
-        table.insertBefore(newRow, tbody.lastChild);
-        //table.appendChild(newRow);
+        var tbody = getTableBody();
+        tbody.insertBefore(newRow, tbody.lastChild);
+        //tbody.appendChild(newRow);
     }
     th.removeRow = function(row_id) {
         //try {
@@ -137,8 +136,7 @@ function RowsDrawer(colsBuffer) {
     }
     function getRowById(row_id) {
         try {
-            var table = th.tablePanel.firstChild;
-            var tbody = table.firstChild;
+            var tbody = getTableBody();
             for (var i=0; i<tbody.childNodes.length; ++i) {
                 var row = tbody.childNodes[i];
                 if (row.getAttribute('id')==row_id) {
@@ -147,6 +145,10 @@ function RowsDrawer(colsBuffer) {
             }
         } catch (e) {}
         return false;
+    }
+    function getTableBody() {
+        var table = th.tablePanel.firstChild;
+        return table.firstChild;
     }
 }
 
@@ -163,10 +165,9 @@ function RowDrawer(colsBuffer) {
         return rowHtml + "</tr>";
     }
     function generateRowInner(row_id) {
-        var rowHtml = "<tr id='" + row_id+ "'>";
-        rowHtml += colsBuffer.toHtml();
-        rowHtml += "<td><a href='#' onclick='dynamicTables.removeRow("+row_id+");'>Del row...</a></td>";
-        return rowHtml + "</tr>";
+        var rowInner = colsBuffer.toHtml();
+        rowInner += "<td><a href='#' onclick='dynamicTables.removeRow("+row_id+");'>Del row...</a></td>";
+        return rowInner;
     }
     this.getClearRowInner = function(row_id) {
         colsBuffer.clearTempValues();
@@ -191,12 +192,16 @@ function ColsBuffer() {
     }
     th.fillTempValues = function(rowData) {
         for (var j=0; j < rowData.length; ++j) {
-            var id = rowData[j][DynamicTablesConsts_CELL_ID_NUM];
-            for (var k=0; k < th.temp.length; ++k) {
-                if (th.temp[k].id == id) {
-                    th.temp[k].value = rowData[j][DynamicTablesConsts_CELL_VALUE_NUM];
-                    break;
-                }
+            var tableRowId = rowData[j][DynamicTablesConsts_CELL_ID_NUM];
+            var value = rowData[j][DynamicTablesConsts_CELL_VALUE_NUM];
+            setValue(tableRowId, value);
+        }
+    }
+    function setValue(tableRowId, value) {
+        for (var k=0; k < th.temp.length; ++k) {
+            if (th.temp[k].id == tableRowId) {
+                th.temp[k].value = rowData[j][DynamicTablesConsts_CELL_VALUE_NUM];
+                break;
             }
         }
     }
