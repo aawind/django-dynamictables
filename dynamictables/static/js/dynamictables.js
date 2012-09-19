@@ -75,6 +75,7 @@ function TableDrawer() {
         //try {
             headDrawer.data = th.data;
             th.rowsDrawer.data = th.data;
+            th.rowsDrawer.tablePanel = th.tablePanel;
             th.tablePanel.innerHTML = "<table>" + headDrawer.draw() +
                 th.rowsDrawer.draw() + "</table>";
         //} catch (e) {}
@@ -136,7 +137,7 @@ function RowsDrawer(colsBuffer) {
     }
     function getRowById(row_id) {
         try {
-            var table = th.tablePanel.firstChild();
+            var table = th.tablePanel.firstChild;
             for (var i=0; i<table.childNodes.length; ++i) {
                 var row = table.childNodes[i];
                 if (row.getAttribute('id')==row_id) {
