@@ -62,7 +62,7 @@ function DynamicTables() {
         tableDrawer.tablePanel = th.tablePanel;
         tableDrawer.draw();
     }
-    th.setCurrentCellDate(dateText) {
+    th.setCurrentCellDate = function(dateText) {
         alert(dateText);
     }
 }
