@@ -200,7 +200,7 @@ function ColsBuffer() {
     function setValue(tableRowId, value) {
         for (var k=0; k < th.temp.length; ++k) {
             if (th.temp[k].id == tableRowId) {
-                th.temp[k].value = rowData[j][DynamicTablesConsts_CELL_VALUE_NUM];
+                th.temp[k].value = value;
                 break;
             }
         }
