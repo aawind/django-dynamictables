@@ -125,7 +125,7 @@ function RowsDrawer(colsBuffer) {
         newRow.innerHTML = rowDrawer.getClearRowInner(-1);
         newRow.setAttribute("id", '-1');
         var table = th.tablePanel.firstChild;
-        var tbody = tbody.firstChild;
+        var tbody = table.firstChild;
         table.insertBefore(newRow, tbody.lastChild);
         //table.appendChild(newRow);
     }
@@ -138,8 +138,9 @@ function RowsDrawer(colsBuffer) {
     function getRowById(row_id) {
         try {
             var table = th.tablePanel.firstChild;
-            for (var i=0; i<table.childNodes.length; ++i) {
-                var row = table.childNodes[i];
+            var tbody = table.firstChild;
+            for (var i=0; i<tbody.childNodes.length; ++i) {
+                var row = tbody.childNodes[i];
                 if (row.getAttribute('id')==row_id) {
                     return row;
                 }
