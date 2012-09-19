@@ -49,6 +49,9 @@
             );
             $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
             $('#datepicker').blur(function (e) {dynamicTables.validate_editor();});
+            $('#datepicker').datepicker({
+                onSelect: function(dateText, inst) {dynamicTables.setCurrentCellDate(dateText);}
+            });
         });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
