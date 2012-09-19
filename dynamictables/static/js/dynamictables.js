@@ -139,6 +139,7 @@ function RowsDrawer(colsBuffer) {
             var tbody = getTableBody();
             for (var i=0; i<tbody.childNodes.length; ++i) {
                 var row = tbody.childNodes[i];
+                alert(row.getAttribute('id'));
                 if (row.getAttribute('id')==row_id) {
                     return row;
                 }
