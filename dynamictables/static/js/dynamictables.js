@@ -274,6 +274,7 @@ function DateEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
+        return;
         var $dph = $('#datepicker_holder');
         var editor = mainValidator.getMainEditor();
         editor.$instance.detach().prependTo($dph);
