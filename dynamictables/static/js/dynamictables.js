@@ -119,15 +119,16 @@ function RowsDrawer(colsBuffer) {
         allRowsHtml += "<tr><td><a href='#' onclick='dynamicTables.appendRow();'>Add row...</a></td></tr>";
         return allRowsHtml;
     }
-    this.appendRow = function() {
+    th.appendRow = function() {
         var newRow = document.createElement('tr');
         newRow.innerHTML = rowDrawer.getClearRowInner(-1);
         newRow.setAttribute("id", '-1');
         var table = th.tablePanel.firstChild;
-        table.insertBefore(newRow, table.lastChild);
+        var tbody = tbody.firstChild;
+        table.insertBefore(newRow, tbody.lastChild);
         //table.appendChild(newRow);
     }
-    this.removeRow = function(row_id) {
+    th.removeRow = function(row_id) {
         //try {
         var row = getRowById(row_id);
         row.parentNode.removeChild(row);
@@ -353,7 +354,6 @@ function Cell() {
         var row = th.$cell.parent().attr('id');
         var col = th.$cell.attr('id');
         var col_type = th.colsBuffer.getColumnType(col);
-        //getColumnType(col);
 
         if (isOnInput()) {
             return;
@@ -371,39 +371,6 @@ function Cell() {
         return false;
     }
 }
-/*
-function RowsEditor() {
-    var th = this;
-    var rowDrawer = new RowDrawer();
-    
-    this.appendRow = function() {
-        var newRow = document.createElement('tr');
-        newRow.innerHTML = rowDrawer.getClearRowInner(-1);
-        newRow.setAttribute("id", '-1');
-        var table = th.tablePanel.firstChild;
-        table.insertBefore(newRow, table.lastChild);
-        //table.appendChild(newRow);
-    }
-    this.removeRow = function(row_id) {
-        //try {
-        var row = getRowById(row_id);
-        row.parentNode.removeChild(row);
-        //} catch (e) {}
-    }
-    function getRowById(row_id) {
-        try {
-            var table = th.tablePanel.firstChild();
-            for (var i=0; i<table.childNodes.length; ++i) {
-                var row = table.childNodes[i];
-                if (row.getAttribute('id')==row_id) {
-                    return row;
-                }
-            }
-        } catch (e) {}
-        return false;
-    }
-}*/
-
 
 //{% dajaxice_js_import %}
 
