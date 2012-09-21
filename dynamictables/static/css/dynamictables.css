@@ -20,4 +20,11 @@ a {
 #right_panel td {
     background: #fff;
     border: 1px solid #999;
+    text-align: center;
+}
+
+#right_panel .head td {
+    background: #999;
+    border: 1px solid #777;
+    color: #fff;
 }

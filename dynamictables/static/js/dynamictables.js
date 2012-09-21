@@ -94,7 +94,7 @@ function HeadDrawer(colsBuffer) {
             var cellData = new CellData(th.data.columns[i]);
             fillCell(cellData);
         }
-        return "<tr>"+head+"</tr>";
+        return "<tr class='head'>"+head+"</tr>";
     }
     function fillCell(cellData) {
         head += "<td id='" + cellData.id + "'>" + cellData.title + "</td>";
