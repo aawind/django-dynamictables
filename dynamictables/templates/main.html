@@ -51,6 +51,18 @@
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
+            $('#ui-datepicker-div').mouseover(function(){
+                $('#datepicker').yyy = true;
+            });
+            $('#ui-datepicker-div').mouseout(function(){
+                $('#datepicker').yyy = false;
+            });
+            $('#ui-datepicker-div').mouseout(function(){
+                $('#datepicker').yyy = false;
+            });
+            $('#datepicker').datepicker({
+                onClose: function(dateText, inst) { alert("678"); }
+            });
         });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
