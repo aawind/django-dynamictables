@@ -49,9 +49,11 @@
             );
             $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
             $('#datepicker').change(function () {
-                alert("!!!");});
-            $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();});
+            $('#datepicker').blur(function (e) {
+                dynamicTables.hide_editor();
+                ///TODO убрать
+                });
             /*$('#datepicker').datepicker({
                 onSelect: function(dateText, inst) {
                     alert(dateText);

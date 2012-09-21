@@ -33,6 +33,9 @@ function DynamicTables() {
     th.validate_editor = function() {
         editor.validator.validate();
     }
+    th.hide_editor = function() {
+        editor.validator.hide();
+    }
     th.enable_edit = function($cell) {
         cell.$cell = $cell;
         cell.enable_edit();
@@ -235,7 +238,13 @@ function EditorValidator(mainEditor) {
 
     th.validate = function() {
         var editor = mainEditor.getEditorByType(mainEditor.type);
-        editor.validator.validate_edit();
+        if (editor.validator.validate_edit()) {
+            mainEditor.clear_last_editor();
+        }
+    }
+    th.hide = function() {
+        var editor = mainEditor.getEditorByType(mainEditor.type);
+        editor.validator.hide_edit();
         mainEditor.clear_last_editor();
     }
 
@@ -267,6 +276,7 @@ function SimpleEditorValidator(mainValidator) {
         var val = editor.$instance.value;
         editor.$cell.text(val);
         mainValidator.doValidate(val, editor.type, editor.$cell);
+        return true;
     }
 }
 
@@ -277,22 +287,21 @@ function DateEditorValidator(mainValidator) {
     th.validate_edit = function() {
         var editor = mainValidator.getMainEditor();
         var $editorInstance = editor.$instance;
-        //if (onceStarted) {
-            var $dph = $('#datepicker_holder');
-            $editorInstance.detach().prependTo($dph);
-            var dt = $editorInstance.datepicker('getDate');
-            var dt_s = $.datepicker.formatDate(
-                'yy-mm-dd',
-                $editorInstance.datepicker("getDate")
-            );
-            editor.$cell.text(dt_s);
-            //alert(dt_s+'=='+editor.$cell.text());
-            mainValidator.doValidate(dt_s, 'D', editor.$cell);
-            //onceStarted = false;
-        //} else {
-        //    onceStarted = true;
-        //    $editorInstance.blur();
-        //}
+        mainValidator.doValidate($editorInstance.text(), 'D', editor.$cell);
+        return false;
+    }
+    th.hide_edit = function() {
+        var $dph = $('#datepicker_holder');
+        var editor = mainValidator.getMainEditor();
+        var $editorInstance = editor.$instance;
+        $editorInstance.detach().prependTo($dph);
+        var dt = $editorInstance.datepicker('getDate');
+        var dt_s = $.datepicker.formatDate(
+            'yy-mm-dd',
+            $editorInstance.datepicker("getDate")
+        );
+        editor.$cell.text(dt_s);
+        return false;
     }
 }
 
