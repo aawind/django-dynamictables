@@ -51,11 +51,11 @@
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
-            $('#ui-datepicker-div').mouseover(function(){
+            $('#ui-datepicker-div').mouseenter(function(){
                 $('#datepicker').yyy = true;
             });
-            $('#ui-datepicker-div').mouseout(function(){
-                $('#datepicker').yyy = false;
+            $('#ui-datepicker-div').mouseleave(function(){
+                $('#datepicker').yyy = true;
             });
             $('#ui-datepicker-div').click(function(){
                 alert('111');
