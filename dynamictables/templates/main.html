@@ -48,6 +48,8 @@
                     $.extend($.datepicker.regional["ru"])
             );
             $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+            $('#datepicker').onSelect(function(e) {
+                alert("!!!");});
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();});
             /*$('#datepicker').datepicker({

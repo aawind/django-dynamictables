@@ -272,12 +272,12 @@ function SimpleEditorValidator(mainValidator) {
 
 function DateEditorValidator(mainValidator) {
     var th = this;
-    var onceStarted = false;
+    //var onceStarted = false;
 
     th.validate_edit = function() {
         var editor = mainValidator.getMainEditor();
         var $editorInstance = editor.$instance;
-        if (onceStarted) {
+        //if (onceStarted) {
             var $dph = $('#datepicker_holder');
             $editorInstance.detach().prependTo($dph);
             var dt = $editorInstance.datepicker('getDate');
@@ -288,11 +288,11 @@ function DateEditorValidator(mainValidator) {
             editor.$cell.text(dt_s);
             //alert(dt_s+'=='+editor.$cell.text());
             mainValidator.doValidate(dt_s, 'D', editor.$cell);
-            onceStarted = false;
-        } else {
-            onceStarted = true;
-            $editorInstance.blur();
-        }
+            //onceStarted = false;
+        //} else {
+        //    onceStarted = true;
+        //    $editorInstance.blur();
+        //}
     }
 }
 
