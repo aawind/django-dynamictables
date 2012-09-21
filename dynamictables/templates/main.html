@@ -57,11 +57,10 @@
             $('#ui-datepicker-div').mouseout(function(){
                 $('#datepicker').yyy = false;
             });
-            $('#ui-datepicker-div').mouseout(function(){
+            $('#ui-datepicker-div').click(function(){
+                alert('111');
                 $('#datepicker').yyy = false;
-            });
-            $('#datepicker').datepicker({
-                onClose: function(dateText, inst) { alert("678"); }
+                $('#datepicker').blur();
             });
         });
         dynamicTables.tablePanel = right_panel;
