@@ -272,20 +272,27 @@ function SimpleEditorValidator(mainValidator) {
 
 function DateEditorValidator(mainValidator) {
     var th = this;
+    var onceStarted = false;
 
     th.validate_edit = function() {
-        return;
-        var $dph = $('#datepicker_holder');
         var editor = mainValidator.getMainEditor();
-        editor.$instance.detach().prependTo($dph);
-        var dt = editor.$instance.datepicker('getDate');
-        var dt_s = $.datepicker.formatDate(
-            'yy-mm-dd',
-            editor.$instance.datepicker("getDate")
-        );
-        editor.$cell.text(dt_s);
-        alert(dt_s+'=='+editor.$cell.text());
-        mainValidator.doValidate(dt_s, 'D', editor.$cell);
+        var $editorInstance = editor.$instance;
+        if (onceStarted) {
+            var $dph = $('#datepicker_holder');
+            $editorInstance.detach().prependTo($dph);
+            var dt = $editorInstance.datepicker('getDate');
+            var dt_s = $.datepicker.formatDate(
+                'yy-mm-dd',
+                $editorInstance.datepicker("getDate")
+            );
+            editor.$cell.text(dt_s);
+            alert(dt_s+'=='+editor.$cell.text());
+            mainValidator.doValidate(dt_s, 'D', editor.$cell);
+            onceStarted = false;
+        } else {
+            onceStarted = true;
+            $editorInstance.blur();
+        }
     }
 }
 
