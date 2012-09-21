@@ -48,18 +48,9 @@
                     $.extend($.datepicker.regional["ru"])
             );
             $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-            $('#datepicker').change(function () {
-                dynamicTables.validate_editor();});
             $('#datepicker').blur(function (e) {
-                dynamicTables.hide_editor();
-                ///TODO убрать
+                dynamicTables.validate_editor();
                 });
-            /*$('#datepicker').datepicker({
-                onSelect: function(dateText, inst) {
-                    alert(dateText);
-                    dynamicTables.setCurrentCellDate(dateText);
-                }
-            });*/
         });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
