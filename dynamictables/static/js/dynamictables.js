@@ -286,7 +286,7 @@ function DateEditorValidator(mainValidator) {
                 $editorInstance.datepicker("getDate")
             );
             editor.$cell.text(dt_s);
-            alert(dt_s+'=='+editor.$cell.text());
+            //alert(dt_s+'=='+editor.$cell.text());
             mainValidator.doValidate(dt_s, 'D', editor.$cell);
             onceStarted = false;
         } else {
