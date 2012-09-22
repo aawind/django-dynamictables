@@ -42,7 +42,13 @@
         <br clear="all">
     {% endblock %}</div>
     {% block form %}{% endblock %}
+    <div id="testResults"></div>
     <script>
+        function debug(s) {
+            var newP = document.createElement('p');
+            newP.innerHTML = s;
+            testResults.appendChild(newP);
+        }
         $(function(){
             $.datepicker.setDefaults(
                     $.extend($.datepicker.regional["ru"])
@@ -52,9 +58,15 @@
                 changeMonth: true,
                 changeYear: true,
                 onSelect: function( selectedDate ) {
-                    alert("main: "+selectedDate);
+                    debug("main: "+selectedDate);
                     dynamicTables.selectedDate = selectedDate;
-                    alert("main: "+selectedDate+"-End");
+                    debug("main: "+selectedDate+"-End");
+                },
+                click: function() {
+                    debug('click');
+                },
+                onClick: function() {
+                    debug('onClick');
                 }
             });
             $('#datepicker').blur(function (e) {

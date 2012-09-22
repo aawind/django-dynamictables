@@ -283,6 +283,7 @@ function DateEditorValidator(mainValidator) {
         try {
             selectedDate = dynamicTables.selectedDate;
             //alert(selectedDate);
+            debug('js: '+selectedDate);
         } catch (e) {
         }
         if (selectedDate) {
