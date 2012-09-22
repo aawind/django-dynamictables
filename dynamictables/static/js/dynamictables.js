@@ -289,8 +289,14 @@ function DateEditorValidator(mainValidator) {
         if (selectedDate) {
             dateString = selectedDate;
         }
-        //$editorInstance.datepicker();
-        debug('ui-datepicker-div: '+ $('ui-datepicker-div').text());
+
+        function isFocusInCalendar() {
+            $calendar = $('ui-datepicker-calendar').get(0);
+            debug('ui-datepicker-div: '+ $calendar.html());
+        }
+
+        isFocusInCalendar();
+
 
         $editorInstance.detach().prependTo($dph);
         editor.$cell.text(dateString);
