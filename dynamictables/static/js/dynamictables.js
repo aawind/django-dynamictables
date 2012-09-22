@@ -282,6 +282,7 @@ function DateEditorValidator(mainValidator) {
         var selectedDate = false;
         try {
             selectedDate = $('#datepicker').selectedDate;
+            alert(selectedDate);
         } catch (e) {
         }
         if (selectedDate) {
