@@ -14,7 +14,7 @@ a {
 }
 #datepicker_holder{ bottom:100%; position: absolute;}
 4iframe { border: none; margin: 0; padding: 0; width:100%; height:100%; background:#00ff00; overflow: hidden; }
-.panel td {min-width: 150px; height: 20px;}
+.panel td {min-width: 150px; height: 23px;}
 .panel a:hover { color: #77aa77; }
 
 #right_panel td {
@@ -32,5 +32,6 @@ a {
 
 input {
     margin: 0px;
-    width: 100%;
+    text-align: center;
+    width: auto;
 }
