@@ -271,6 +271,9 @@ function DateEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
+        if (dynamicTables.yyy) {
+            return;
+        }
         var editor = mainValidator.getMainEditor();
         var $editorInstance = editor.$instance;
         var $dph = $('#datepicker_holder');

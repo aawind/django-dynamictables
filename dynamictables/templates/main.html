@@ -76,10 +76,15 @@
                 debug('ui-datepicker-div: mouse focusin');
             });
             $('#ui-datepicker-div').mouseenter(function(){
+                dynamicTables.yyy = true;
                 debug('ui-datepicker-div: mouse entered');
             });
             $('#ui-datepicker-div').mouseleave(function(){
                 debug('ui-datepicker-div: mouse leaved');
+                if (dynamicTables.yyy) {
+                    dynamicTables.yyy = false;
+                    dynamicTables.validate_editor();
+                }
             });
             /*$('#datepicker').datepicker("widget").live('click', function(){
                 alert('111');
