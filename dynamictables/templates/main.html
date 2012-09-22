@@ -76,13 +76,13 @@
                 debug('ui-datepicker-div: mouse focusin');
             });
             $('#ui-datepicker-div').mouseenter(function(){
-                dynamicTables.yyy = true;
+                yyy = true;
                 debug('ui-datepicker-div: mouse entered');
             });
             $('#ui-datepicker-div').mouseleave(function(){
                 debug('ui-datepicker-div: mouse leaved');
-                if (dynamicTables.yyy) {
-                    dynamicTables.yyy = false;
+                if (yyy) {
+                    yyy = false;
                     dynamicTables.validate_editor();
                 }
             });

@@ -4,6 +4,7 @@
 * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
 
 //{% load dajaxice_templatetags %}
+var yyy = false;
 
 //function DynamicTablesConsts() {
     DynamicTablesConsts_COL_ID_NUM = 1;
@@ -271,7 +272,7 @@ function DateEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
-        if (dynamicTables.yyy) {
+        if (yyy) {
             return;
         }
         var editor = mainValidator.getMainEditor();
