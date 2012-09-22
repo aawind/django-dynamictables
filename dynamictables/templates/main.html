@@ -52,8 +52,9 @@
                 changeMonth: true,
                 changeYear: true,
                 onSelect: function( selectedDate ) {
-                    $("#datepicker").selectedDate = selectedDate;
                     alert("main: "+selectedDate);
+                    $("#datepicker").selectedDate = selectedDate;
+                    alert("main: "+selectedDate+"-End");
                 }
             });
             $('#datepicker').blur(function (e) {
