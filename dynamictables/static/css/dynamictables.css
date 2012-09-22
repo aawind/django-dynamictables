@@ -38,3 +38,5 @@ input {
     text-align: center;
     width: 146px;
 }
+
+.ui-state-hover {width: 20px; height: 20px;}
