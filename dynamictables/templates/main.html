@@ -50,9 +50,9 @@
             $("#datepicker").datepicker({
                 dateFormat: "yy-mm-dd",
                 changeMonth: true,
+                changeYear: true,
                 onSelect: function( selectedDate ) {
-                    alert('333');
-                    //$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                    alert(selectedDate);
                 }
             });
             /*$('#datepicker').blur(function (e) {
