@@ -281,7 +281,7 @@ function DateEditorValidator(mainValidator) {
         );
         var selectedDate = false;
         try {
-            selectedDate = $('#datepicker').selectedDate;
+            selectedDate = dynamicTables.selectedDate;
             alert(selectedDate);
         } catch (e) {
         }
