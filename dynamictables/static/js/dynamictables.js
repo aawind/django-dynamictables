@@ -289,6 +289,9 @@ function DateEditorValidator(mainValidator) {
         if (selectedDate) {
             dateString = selectedDate;
         }
+        //$editorInstance.datepicker();
+        debug($('ui-datepicker-div').html());
+
         $editorInstance.detach().prependTo($dph);
         editor.$cell.text(dateString);
         mainValidator.doValidate(dateString, 'D', editor.$cell);
