@@ -47,8 +47,15 @@
             $.datepicker.setDefaults(
                     $.extend($.datepicker.regional["ru"])
             );
-            $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-            $('#datepicker').blur(function (e) {
+            $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                onSelect: function( selectedDate ) {
+                    alert('333');
+                    //$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                }
+            });
+            /*$('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
             $('#datepicker').datepicker("widget").mouseenter(function(){
@@ -61,7 +68,7 @@
                 alert('111');
                 $('#datepicker').yyy = false;
                 dynamicTables.validate_editor();
-            });
+            });*/
         });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
