@@ -291,7 +291,7 @@ function DateEditorValidator(mainValidator) {
         }
 
         function isFocusInCalendar() {
-            $calendar = $('ui-datepicker-calendar').get(0);
+            var $calendar = $('ui-datepicker-div').get(0);
             debug('ui-datepicker-div: '+ $calendar.html());
         }
 
