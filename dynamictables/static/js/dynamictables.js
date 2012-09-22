@@ -4,7 +4,6 @@
 * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
 
 //{% load dajaxice_templatetags %}
-var yyy = false;
 
 //function DynamicTablesConsts() {
     DynamicTablesConsts_COL_ID_NUM = 1;
@@ -19,6 +18,8 @@ var yyy = false;
     DynamicTablesConsts_ROW_DATA_NUM = 1;
 
     DynamicTablesConsts_VALUE_ONCLICK = "onclick='dynamicTables.enable_edit($(this));'";
+
+    DynamicTables_datepickerEnabled = true;
 //}
 
 function DynamicTables() {
@@ -62,6 +63,12 @@ function DynamicTables() {
         tableDrawer.data = data;
         tableDrawer.tablePanel = th.tablePanel;
         tableDrawer.draw();
+    }
+    th.setDatepickerEnabled = function(enabled) {
+        DynamicTables_datepickerEnabled = enabled;
+    }
+    th.isDatepickerEnabled = function() {
+        return DynamicTables_datepickerEnabled;
     }
 }
 
@@ -272,8 +279,8 @@ function DateEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
-        debug('validate_edit:'+yyy);
-        if (yyy) {
+        debug('validate_edit:'+DynamicTables_datepickerEnabled);
+        if (!DynamicTables_datepickerEnabled) {
             return;
         }
         var editor = mainValidator.getMainEditor();

@@ -61,8 +61,9 @@
                     debug("main: "+selectedDate);
                     dynamicTables.selectedDate = selectedDate;
                     debug("main: "+selectedDate+"-End");
-                    yyy = false;
+                    dynamicTables.setDatepickerEnabled(true);
                     dynamicTables.validate_editor();
+                    debug("main: "+selectedDate+"-End2");
                 },
                 click: function() {
                     debug('click');
@@ -78,12 +79,12 @@
                 debug('ui-datepicker-div: mouse focusin');
             });
             $('#ui-datepicker-div').mouseenter(function(){
-                yyy = true;
+                dynamicTables.setDatepickerEnabled(false);
                 debug('ui-datepicker-div: mouse entered');
             });
             $('#ui-datepicker-div').mouseleave(function(){
                 debug('ui-datepicker-div: mouse leaved');
-                yyy = false;
+                dynamicTables.setDatepickerEnabled(true);
             });
             /*$('#datepicker').datepicker("widget").live('click', function(){
                 alert('111');
