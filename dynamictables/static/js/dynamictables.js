@@ -290,12 +290,29 @@ function DateEditorValidator(mainValidator) {
             dateString = selectedDate;
         }
 
-        function isFocusInCalendar() {
+        /*function isFocusInCalendar() {
+            var datepickerDiv = document.getElementById('ui-datepicker-div');
+
+            function findFocus(object) {
+                try {
+                    for (var i=0; i < object.childNodes.length; ++i) {
+                        var child = object.childNodes[i];
+                        if (child.gotFocus)
+                        findFocus(child);
+                    }
+                } catch (e) {
+                }
+                return false;
+            }
+
+            findFocus(datepickerDiv);
+
+
             var $calendar = $('ui-datepicker-div').get(0);
             debug('ui-datepicker-div: '+ $calendar.html());
         }
 
-        isFocusInCalendar();
+        isFocusInCalendar();*/
 
 
         $editorInstance.detach().prependTo($dph);

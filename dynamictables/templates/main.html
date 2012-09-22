@@ -72,13 +72,13 @@
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
-            /*$('#datepicker').datepicker("widget").mouseenter(function(){
-                $('#datepicker').yyy = true;
+            $('ui-datepicker-div').mouseenter(function(){
+                debug('ui-datepicker-div: mouse entered');
             });
-            $('#datepicker').datepicker("widget").mouseleave(function(){
-                $('#datepicker').yyy = true;
+            $('ui-datepicker-div').mouseleave(function(){
+                debug('ui-datepicker-div: mouse leaved');
             });
-            $('#datepicker').datepicker("widget").live('click', function(){
+            /*$('#datepicker').datepicker("widget").live('click', function(){
                 alert('111');
                 $('#datepicker').yyy = false;
                 dynamicTables.validate_editor();
