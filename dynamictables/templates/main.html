@@ -61,6 +61,8 @@
                     debug("main: "+selectedDate);
                     dynamicTables.selectedDate = selectedDate;
                     debug("main: "+selectedDate+"-End");
+                    yyy = false;
+                    dynamicTables.validate_editor();
                 },
                 click: function() {
                     debug('click');
@@ -81,10 +83,7 @@
             });
             $('#ui-datepicker-div').mouseleave(function(){
                 debug('ui-datepicker-div: mouse leaved');
-                if (yyy) {
-                    yyy = false;
-                    dynamicTables.validate_editor();
-                }
+                yyy = false;
             });
             /*$('#datepicker').datepicker("widget").live('click', function(){
                 alert('111');
