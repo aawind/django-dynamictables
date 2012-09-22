@@ -290,7 +290,7 @@ function DateEditorValidator(mainValidator) {
             dateString = selectedDate;
         }
         //$editorInstance.datepicker();
-        debug($('ui-datepicker-div').html());
+        debug($('ui-datepicker-div'));
 
         $editorInstance.detach().prependTo($dph);
         editor.$cell.text(dateString);
