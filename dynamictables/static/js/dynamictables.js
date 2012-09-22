@@ -269,31 +269,28 @@ function SimpleEditorValidator(mainValidator) {
 
 function DateEditorValidator(mainValidator) {
     var th = this;
-    var onceStarted = false;
 
     th.validate_edit = function() {
-        if ($('#datepicker').yyy) {
-            return;
-        }
         var editor = mainValidator.getMainEditor();
         var $editorInstance = editor.$instance;
-        //if (onceStarted) {
-            var $dph = $('#datepicker_holder');
-            $editorInstance.detach().prependTo($dph);
-            var dt = $editorInstance.datepicker('getDate');
-            var dt_s = $.datepicker.formatDate(
-                'yy-mm-dd',
-                $editorInstance.datepicker("getDate")
-            );
-            editor.$cell.text(dt_s);
-            //alert(dt_s+'=='+editor.$cell.text());
-            mainValidator.doValidate(dt_s, 'D', editor.$cell);
-            onceStarted = false;
-        //} else {
-        //    onceStarted = true;
-        //    var e = $.Event('blur');
-        //    $editorInstance.trigger(e);
-        //}
+        var $dph = $('#datepicker_holder');
+        var dt = $editorInstance.datepicker('getDate');
+        var dateString = $.datepicker.formatDate(
+            'yy-mm-dd',
+            $editorInstance.datepicker("getDate")
+        );
+        var selectedDate = false;
+        try {
+            selectedDate = $('#datepicker').selectedDate;
+        } catch (e) {
+        }
+        if (selectedDate) {
+            dateString = selectedDate;
+        }
+        $editorInstance.detach().prependTo($dph);
+        editor.$cell.text(dateString);
+        mainValidator.doValidate(dateString, 'D', editor.$cell);
+        $('#datepicker').selectedDate = false;
     }
 }
 
