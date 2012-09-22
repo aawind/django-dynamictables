@@ -51,16 +51,16 @@
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
-            $('#ui-datepicker-div').mouseenter(function(){
+            $('#datepicker').datepicker("widget").mouseenter(function(){
                 $('#datepicker').yyy = true;
             });
-            $('#ui-datepicker-div').mouseleave(function(){
+            $('#datepicker').datepicker("widget").mouseleave(function(){
                 $('#datepicker').yyy = true;
             });
-            $('#ui-datepicker-div').click(function(){
+            $('#datepicker').datepicker("widget").live('click', function(){
                 alert('111');
                 $('#datepicker').yyy = false;
-                $('#datepicker').blur();
+                dynamicTables.validate_editor();
             });
         });
         dynamicTables.tablePanel = right_panel;

@@ -21,6 +21,11 @@ def main(request, template="main.html"):
       "dateform": DateForm()
     }
     return render(request, template, context)
+
+def tests(request, template="tests.html"):
+    context = {
+    }
+    return render(request, template, context)
     
 def form(request, template="form.html"):
     print request

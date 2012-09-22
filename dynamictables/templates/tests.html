@@ -1,0 +1,32 @@
+{% load dajaxice_templatetags %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}DinamicTables{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/dynamictables.css">
+    {% block extra_css %}{% endblock %}
+
+    <link type="text/css" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js" ></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js" ></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/i18n/jquery-ui-i18n.js" ></script>
+    <!--script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.min.js" ></script-->
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" ></script>
+    <script src="http://cdn.jquerytools.org/1.2.5/form/jquery.tools.min.js"></script>
+
+    {% block extra_js %}
+        {% dajaxice_js_import %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/dynamictables.js" ></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/tests.js" ></script>
+    {% endblock %}
+    <script>
+        var dynamicTables = new DynamicTables();
+    </script>
+</head>
+<body>
+<div id="tests_pole"></div>
+<script>
+    dynamicTablesTests.execute();
+</script>
+</body>
