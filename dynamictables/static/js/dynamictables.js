@@ -240,8 +240,9 @@ function EditorValidator(mainEditor) {
 
     th.validate = function() {
         var editor = mainEditor.getEditorByType(mainEditor.type);
-        editor.validator.validate_edit();
-        mainEditor.clear_last_editor();
+        if (editor.validator.validate_edit()) {
+            mainEditor.clear_last_editor();
+        }
     }
 
     th.doValidate = function(val, f_type, $cell) {
@@ -272,6 +273,7 @@ function SimpleEditorValidator(mainValidator) {
         var val = editor.$instance.value;
         editor.$cell.text(val);
         mainValidator.doValidate(val, editor.type, editor.$cell);
+        return true;
     }
 }
 
@@ -281,7 +283,7 @@ function DateEditorValidator(mainValidator) {
     th.validate_edit = function() {
         debug('validate_edit:'+DynamicTables_datepickerEnabled);
         if (!DynamicTables_datepickerEnabled) {
-            return;
+            return false;
         }
         var editor = mainValidator.getMainEditor();
         var $editorInstance = editor.$instance;
@@ -302,35 +304,11 @@ function DateEditorValidator(mainValidator) {
             dateString = selectedDate;
         }
 
-        /*function isFocusInCalendar() {
-            var datepickerDiv = document.getElementById('ui-datepicker-div');
-
-            function findFocus(object) {
-                try {
-                    for (var i=0; i < object.childNodes.length; ++i) {
-                        var child = object.childNodes[i];
-                        if (child.gotFocus)
-                        findFocus(child);
-                    }
-                } catch (e) {
-                }
-                return false;
-            }
-
-            findFocus(datepickerDiv);
-
-
-            var $calendar = $('ui-datepicker-div').get(0);
-            debug('ui-datepicker-div: '+ $calendar.html());
-        }
-
-        isFocusInCalendar();*/
-
-
         $editorInstance.detach().prependTo($dph);
         editor.$cell.text(dateString);
         mainValidator.doValidate(dateString, 'D', editor.$cell);
         dynamicTables.selectedDate = false;
+        return true;
     }
 }
 
