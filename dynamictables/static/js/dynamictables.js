@@ -272,6 +272,7 @@ function DateEditorValidator(mainValidator) {
     var th = this;
 
     th.validate_edit = function() {
+        debug('validate_edit:'+yyy);
         if (yyy) {
             return;
         }
