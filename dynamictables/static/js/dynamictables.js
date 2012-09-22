@@ -282,7 +282,7 @@ function DateEditorValidator(mainValidator) {
         var selectedDate = false;
         try {
             selectedDate = dynamicTables.selectedDate;
-            alert(selectedDate);
+            //alert(selectedDate);
         } catch (e) {
         }
         if (selectedDate) {
@@ -291,7 +291,7 @@ function DateEditorValidator(mainValidator) {
         $editorInstance.detach().prependTo($dph);
         editor.$cell.text(dateString);
         mainValidator.doValidate(dateString, 'D', editor.$cell);
-        $('#datepicker').selectedDate = false;
+        dynamicTables.selectedDate = false;
     }
 }
 
