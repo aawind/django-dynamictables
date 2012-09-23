@@ -2,7 +2,7 @@ html, body {
   padding: 0; margin: 0; font-size: 10px;
 }
 
-a {
+.panel a {
   padding: 10px; text-decoration: none;
 }
 .panel {
@@ -38,5 +38,3 @@ input {
     text-align: center;
     width: 146px;
 }
-
-.ui-datepicker-prev, .ui-datepicker-next {width: 20px; height: 20px;}
