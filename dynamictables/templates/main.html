@@ -65,19 +65,10 @@
                     dynamicTables.validate_editor();
                     debug("main: "+selectedDate+"-End2");
                 },
-                click: function() {
-                    debug('click');
-                },
-                onClick: function() {
-                    debug('onClick');
-                }
             });
             $('#datepicker').blur(function (e) {
                 dynamicTables.validate_editor();
                 });
-            $('#ui-datepicker-div').focusin( function(){
-                debug('ui-datepicker-div: mouse focusin');
-            });
             $('#ui-datepicker-div').mouseenter(function(){
                 dynamicTables.setDatepickerEnabled(false);
                 debug('ui-datepicker-div: mouse entered');
@@ -86,11 +77,6 @@
                 debug('ui-datepicker-div: mouse leaved');
                 dynamicTables.setDatepickerEnabled(true);
             });
-            /*$('#datepicker').datepicker("widget").live('click', function(){
-                alert('111');
-                $('#datepicker').yyy = false;
-                dynamicTables.validate_editor();
-            });*/
         });
         dynamicTables.tablePanel = right_panel;
         dynamicTables.activateFirstTable();
