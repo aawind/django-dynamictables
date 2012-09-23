@@ -39,4 +39,4 @@ input {
     width: 146px;
 }
 
-.ui-state-hover {width: 20px; height: 20px;}
+.ui-datepicker-prev, .ui-datepicker-next {width: 20px; height: 20px;}
